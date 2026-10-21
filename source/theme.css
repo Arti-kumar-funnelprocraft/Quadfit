@@ -1,0 +1,8 @@
+﻿/* Shared QuadFit palette: use these tokens for every new section. */
+:root{--quad-accent:#baff32;--quad-accent-hover:#d1ff77;--quad-accent-deep:#84c922;--quad-navy:#000b14;--quad-navy-soft:#000d16;--quad-surface:#061620;--quad-light:#f2f5f3;--quad-white:#fff;--quad-ink:#081923;--quad-muted:#a6bbc4;--quad-lime:var(--quad-accent)}
+.token-variant{--primitive-lime-400:var(--quad-accent);--primitive-lime-500:var(--quad-accent-hover);--primitive-lime-600:var(--quad-accent-deep);--primitive-charcoal-900:var(--quad-navy);--primitive-charcoal-800:var(--quad-surface);--primitive-ivory-50:var(--quad-light);--primitive-ivory-100:var(--quad-light);--color-bg-dark:var(--quad-navy);--color-bg-dark-soft:var(--quad-surface);--color-bg-accent:var(--quad-accent);--color-bg-accent-hover:var(--quad-accent-hover);--color-text-primary:var(--quad-ink);--color-text-inverse:var(--quad-white);--color-text-inverse-muted:var(--quad-muted);--color-bg-primary:var(--quad-light);--color-bg-subtle:var(--quad-light)}
+/* Migrate legacy dark surfaces to the hero palette. */
+.token-variant .method,.token-variant .journey,.token-variant .support,.token-variant .site-footer{background-color:var(--quad-navy)}
+
+/* Editorial hierarchy: regular accent text, preserving the bold hero. */
+.token-variant main section:not(.quad-hero) :is(h1,h2,h3,h4,h5,h6) em{font-weight:400}

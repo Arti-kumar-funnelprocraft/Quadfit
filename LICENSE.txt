@@ -1,0 +1,27 @@
+QUADFIT CUSTOMIZATIONS
+
+Copyright © 2026 Arti Kumatr. All rights reserved.
+
+This notice applies to original QuadFit customizations authored for this project.
+It does not replace or relicense the underlying template or third-party assets.
+
+ORIGINAL TEMPLATE LICENSE (retained verbatim)
+
+GYMGOGYM — WEIGHT PROGRAMME SALES PAGE — SINGLE-PROJECT COMMERCIAL LICENSE
+
+Copyright © 2026 Pedro's Lab. All rights reserved.
+
+The buyer may use and modify this template for one website or one business
+project, including one client website.
+
+The buyer may not resell, redistribute, share, sublicense, or give away the
+template or its source files; upload them to a public template library or public
+repository; use one purchase for multiple projects; or sell a modified version
+as a competing template, theme, or UI kit.
+
+A new license is required for each additional client or project.
+
+Third-party images and fonts remain governed by their own licenses. The template
+is supplied “as is.” The buyer is responsible for testing, integrations, claims,
+and legal compliance. Support and customization are not included unless agreed
+separately in writing.
