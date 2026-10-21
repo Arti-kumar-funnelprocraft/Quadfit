@@ -506,8 +506,7 @@ document.querySelectorAll('[data-start-goal]').forEach(button => {
 const localAssessment = document.querySelector('[data-local-assessment]');
 if (localAssessment) {
   const steps = [...localAssessment.querySelectorAll('[data-assessment-step]')];
-  const fields = localAssessment.querySelector('[data-assessment-fields]');
-  const result = localAssessment.querySelector('[data-assessment-result]');
+  const demoDialog = document.querySelector('[data-demo-dialog]');
   const next = localAssessment.querySelector('[data-assessment-next]');
   const back = localAssessment.querySelector('[data-assessment-back]');
   const error = localAssessment.querySelector('.quad-local-error');
@@ -517,7 +516,7 @@ if (localAssessment) {
     localAssessment.querySelector('[data-assessment-counter]').textContent = `${assessmentStep + 1} / 3`;
     localAssessment.style.setProperty('--assessment-progress', `${(assessmentStep + 1) / 3 * 100}%`);
     back.hidden = assessmentStep === 0;
-    next.innerHTML = assessmentStep === 2 ? 'Show my starting point <span aria-hidden="true">&#8594;</span>' : 'Continue <span aria-hidden="true">&#8594;</span>';
+    next.innerHTML = assessmentStep === 2 ? 'Submit assessment <span aria-hidden="true">&#8594;</span>' : 'Continue assessment <span aria-hidden="true">&#8594;</span>';
     error.textContent = '';
   };
   localAssessment.addEventListener('submit', event => {
@@ -533,35 +532,23 @@ if (localAssessment) {
       steps[assessmentStep].querySelector('input').focus();
       return;
     }
-    const focus = localAssessment.querySelector('input[name="focus"]:checked').value;
-    const messages = {
-      training: 'Bring your goals, available equipment, and schedule to your coach. A clear workout routine is a useful place to start.',
-      nutrition: 'Start by discussing your usual meals and food preferences. Your coach can help you find practical nutrition habits to work on.',
-      consistency: 'Talk through the moments when your routine gets interrupted. A few realistic priorities can help you find your rhythm.',
-      all: 'Review training, nutrition, and consistency together with your coach, so the next step fits the whole picture.'
-    };
-    localAssessment.querySelector('[data-assessment-result-copy]').textContent = messages[focus];
-    const list = localAssessment.querySelector('[data-assessment-result-details]');
-    list.replaceChildren();
-    ['focus','experience','availability'].forEach(name => {
-      const input = localAssessment.querySelector(`input[name="${name}"]:checked`);
-      const li = document.createElement('li');
-      li.textContent = input.nextElementSibling.textContent;
-      list.appendChild(li);
-    });
-    fields.hidden = true; result.hidden = false;
-    localAssessment.querySelector('[data-assessment-counter]').textContent = 'Complete';
-    localAssessment.style.setProperty('--assessment-progress', '100%');
-    result.focus();
+    demoDialog.showModal();
   });
   back.addEventListener('click', () => { assessmentStep = Math.max(0, assessmentStep - 1); renderAssessment(); steps[assessmentStep].querySelector('input').focus(); });
-  localAssessment.querySelector('[data-assessment-reset]').addEventListener('click', () => {
-    localAssessment.reset(); assessmentStep = 0; fields.hidden = false; result.hidden = true;
-    localAssessment.querySelector('[data-assessment-result-details]').replaceChildren();
-    localAssessment.querySelector('[data-assessment-result-copy]').textContent = '';
-    renderAssessment(); steps[0].querySelector('input').focus();
+  const resetAssessment = () => {
+    localAssessment.reset(); assessmentStep = 0;
+    renderAssessment();
+  };
+  demoDialog.querySelectorAll('[data-demo-close]').forEach(button => {
+    button.addEventListener('click', () => demoDialog.close());
   });
-  window.addEventListener('pageshow', () => { localAssessment.reset(); assessmentStep = 0; fields.hidden = false; result.hidden = true; renderAssessment(); });
+  demoDialog.addEventListener('close', resetAssessment);
+  demoDialog.addEventListener('click', event => {
+    if (event.target !== demoDialog) return;
+    const bounds = demoDialog.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) demoDialog.close();
+  });
+  window.addEventListener('pageshow', resetAssessment);
   renderAssessment();
 }
 
